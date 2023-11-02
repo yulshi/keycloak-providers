@@ -20,8 +20,23 @@ git clone git@github.com:yulshi/keycloak-providers.git
 mvn clean package
 ```
 
-部署，其实就是把打好包的jar文件拷贝到Keycloak的providers目录下。
+部署，其实就是把打好包的jar文件拷贝到Keycloak的providers目录下，然后重新启动Keycloak。
 
 ```bash
-cp 
+cp authenticator-provider/target/authenticator-provider.jar $KEYCLOAK_HOME/providers
 ```
+
+## 测试
+
+- keycloak上的设置
+  - 在Keycloak的控制台上选择一个realm
+  - 从左边菜单中选择`Authentication`，在右边窗口里面选择Flow name为`browser`的Flow，然后从左右边的...中选择`Duplicate`，来克隆一份，命名为`secret-question`
+  - 在`secret-question`中的`secret-question forms`这个sub flow中的加号那里点击，选择`Add step`
+  - 从弹出的对话框中选择，`Secret Question`的Authenticator并添加
+  - 设置`Secret Question`的Requirement为`Required`
+  - 然后将这个flow绑定到`Browser flow`
+  - 最后，不要忘记，在`Required actions`这个tab里面，启用（enable）`Secret Question`这个required action。
+- 登录realm的account，来测试登录的效果
+  - 在输入用户名/密码后，会导航到一个标题叫做Setup Secret Question的页面，要求你设置问题的答案。这个页面就是`Secret Question`这个required action来设置的。
+  - 在第二次登录的时候，输入用户名/密码，会导航到一个标题为登录名的页面，要求你回答问题，你输入了上一步设置的答案，就能通过验证，否则不能。
+
