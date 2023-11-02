@@ -14,6 +14,7 @@
         <module>jpa-provider</module>
         <module>authenticator-provider</module>
         <module>register-provider</module>
+        <module>userstorage-provider</module>
     </modules>
 
     <properties>
@@ -54,6 +55,11 @@
             <dependency>
                 <groupId>org.keycloak</groupId>
                 <artifactId>keycloak-model-jpa</artifactId>
+                <version>${keycloak.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.keycloak</groupId>
+                <artifactId>keycloak-model-legacy</artifactId>
                 <version>${keycloak.version}</version>
             </dependency>
         </dependencies>
