@@ -13,6 +13,7 @@
         <module>custom-spi</module>
         <module>jpa-provider</module>
         <module>authenticator-provider</module>
+        <module>register-provider</module>
     </modules>
 
     <properties>
